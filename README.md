@@ -33,9 +33,9 @@ O Node.js chegou para mudar o paradigma de desenvolvimento de aplicações, traz
 
 ### Slides
 
-[Slides](http://cdn.rawgit.com/jacksonfdam/nodejs/master/slides.html#1)
+[Slides](http://cdn.rawgit.com/jacksonfdam/node-babysteps/master/slides.html#1)
 
-[Slides ES6](http://cdn.rawgit.com/jacksonfdam/nodejs/master/slides-es6.html#1)
+[Slides ES6](http://cdn.rawgit.com/jacksonfdam/node-babysteps/master/slides-es6.html#1)
 
-[Slides NOSQL](http://cdn.rawgit.com/jacksonfdam/nodejs/master/slides-nosql.html#1)
+[Slides NOSQL](http://cdn.rawgit.com/jacksonfdam/node-babysteps/master/slides-nosql.html#1)
 
