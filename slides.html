@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NodeJS</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+    @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+    body { font-family: 'Droid Serif'; }
+    h1, h2, h3 {
+      font-family: 'Yanone Kaffeesatz';
+      font-weight: normal;
+    }
+    .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    .remark-slide-content{background: transparent;}
+    .remark-slide {
+      background: url(http://lab.empirio.no/media/images/background.png) #fff center center no-repeat;
+      background-size: cover;
+    }
+    .remark-slide-number{color: #fff;font-size: 1rem;font-weight: bold;}
+
+  </style>
+</head>
+<body>
+  <textarea id="source" style="display:none;">
+
+    class: center, middle
+
+    # NodeJS
+
+    
+    ![NodeJS](https://raw.githubusercontent.com/cerebrobr/adesivos/master/view/nodejs.png)
+    
+
+
+    ---
+
+    # NodeJS
+    ###Intro
+
+    Event-driven I/O server-side JavaScript environment based on V8.
+
+    ---
+
+    # O que é Node.js?
+   
+    Muitos iniciantes em Node tem a dúvida de o quê exatamente ele é, e a descrição em nodejs.org definitivamente não ajuda.
+
+    Uma coisa importante de se perceber é que o Node não é um servidor web. Por ele próprio, não se tem nada. Ele não funciona como o Apache. Não existe um arquivo de configuração onde você o aponta para seus arquivos html. Se você quer que o Node seja um servidor HTTP, você tem que escrever um servidor HTTP (com a ajuda das bibliotecas incluídas). O Node.js é somente outra forma de executar código em seu computador. 
+
+    Ele é simplesmente um JavaScript runtime(ambiente de execução de código JavaScript).
+
+    ---
+    # Conceito
+    
+    O Node JS é um interpretador Javascript do lado do servidor que altera a noção de como um servidor deveria funcionar. Seu objetivo é possibilitar que um programador crie aplicativos altamente escaláveise escreva código que manipule dezenas de milhares de conexões simultâneas.
+
+    Muito útil para criar aplicações Real-time.
+
+    Portanto, possibilita que o Client-side e o Server-side sejam escritosinteiramente útilizando apenas Javascript.
+
+    ---
+    # Programação orientada a eventos
+
+    As linguagens tradicionais normalmente vão executar comandos um atrás do outro, um de cada vez, executando de forma mais lenta pois o comando "2" só executará após o "1" terminar.
+
+    Diferente dessas linguagens que seguem um fluxo de controle padronizado, com o Node desenvolvemos orientado a eventos.
+
+    Então em vez de aguardar um comando terminar sua execução para ir ao próximo, o Node possui um laço de repetição que recebe as informações e dispara uma função de acordo com o evento.
+
+    Esses eventos podem ser dos mais diversos. Você vai utilizar os eventos que o Node já possui e criar os seus de acordo com sua aplicação.
+
+    E isso é muito bom, pois nos permite um sistema assíncrono.
+    ---
+    # Programação orientada a eventos
+
+    ![NodeJS](http://matheusazzi.com/img/post/assincrono.png)
+    
+    ---
+     # E assim nasceu o Node.js
+
+    Foi baseado neste problema que, no final de 2009, Ryan Dahl com a ajuda inicial de
+    14 colaboradores criou o Node.js. Esta tecnologia possui um modelo inovador, sua
+    arquitetura é totalmente non-blocking thread (não-bloqueante), apresentando uma
+    boa performance com consumo de memória e utilizando ao máximo e de forma
+    eficiente o poder de processamento dos servidores, principalmente em sistemas que
+    produzem uma alta carga de processamento.
+
+    ---
+     # E assim nasceu o Node.js
+
+    Esta é uma plataforma altamente escalável e de baixo nível, pois você vai programar
+    diretamente com diversos protocolos de rede e internet ou utilizar bibliotecas
+    que acessam recursos do sistema operacional, principalmente recursos de sistemas
+    baseado em Unix. O Javascript é a sua linguagem de programação, e isso foi possível
+    graças à engine Javascript V8, a mesma utilizada no navegador Google Chrome.
+    ---
+     # Single-thread
+
+    Suas aplicações serão single-thread, ou seja, cada aplicação terá instância de um único
+    processo. Se você esta acostumado a trabalhar com programação concorrente em
+    plataforma multi-thread, infelizmente não será possível com Node, mas saiba que
+    existem outras maneiras de se criar um sistema concorrente, como por exemplo,
+    utilizando clusters, que é um módulo nativo do Node.js e é super fácil de implementá-lo. 
+    Outra maneira é utilizar ao máximo a programação assíncrona.
+    ---
+     # Event-Loop
+
+    Node.js é orientado a eventos, ele segue a mesma filosofia de orientação de eventos
+    do Javascript client-side; a única diferença é que não existem eventos de click do
+    mouse, keyup do teclado ou qualquer evento de componentes HTML. Na verdade
+    trabalhamos comeventos de I/O do servidor, como por exemplo: o evento connect
+    de um banco de dados, um open de um arquivo, um data de um streaming de
+    dados e muitos outros.
+
+
+    O Event-Loop é o agente responsável por escutar e emitir eventos no sistema. Na
+    prática ele é um loop infinito que a cada iteração verifica em sua fila de eventos se um
+    determinado evento foi emitido. Quando ocorre, é emitido um evento. Ele o executa
+    e envia para fila de executados. Quando um evento está em execução, nós podemos
+    programar qualquer lógica dentro dele e isso tudo acontece graças aomecanismo de
+    função callback do Javascript.
+
+    ---
+    # Event-Loop
+
+    O design event-driven doNode.js foi inspirado pelos frameworks EventMachine
+    do Ruby (http://rubyeventmachine.com) e Twisted do Python (http://twistedmatrix.
+    com) . Porém, o Event-loop do Node é mais performático por que seu mecanismo é
+    nativamente executado de forma não-bloqueante. Isso faz deleumgrande diferencial
+    em relação aos seus concorrentes que realizamchamadas bloqueantes para iniciar os
+    seus respectivos Event-loops.
+    ---
+    # Instalação e configuração
+
+    Para configurar o ambiente Node.js, independente de qual sistema operacional você
+    utilizar, as dicas serão asmesmas. É claro que os procedimentos serão diferentes para
+    cada sistema (principalmente para oWindows, mas não será nada grave).
+
+
+    Instalando Node.js: 
+    Primeiro passo, acesse o site oficial: (http://nodejs.org)
+    e clique em Download, para usuários do Windows e MacOSX, basta baixar os
+    seus instaladores e executá-los normalmente. 
+
+    Para quem já utiliza Linux com Package Manager instalado, acesse esse link (https://github.com/joyent/node/wiki/
+    Installing-Node.js-via-package-manager) que é referente as instruções sobre como
+    instalá-lo em diferentes sistemas. 
+
+    Instale o Node.js de acordo com seu sistema, caso não ocorra problemas, basta abrir o seu terminal console ou prompt de comando e digitar o comando: node -v && npm -v para ver as respectivas versões do Node.js e NPM (Node Package Manager) que foram instaladas.
+
+    ---
+     # Já tenho o Node instalado, e agora o que fazer?
+
+     Uma vez instalado, agora você tem acesso a um novo comando chamado node. Você pode usar o comando node de duas formas diferentes. A primeira é sem argumentos. Isto irá abrir um shell interativo (REPL: read-eval-print-loop), onde você pode executar código JavaScript puro.
+
+        $ node
+        > console.log('Hello World');
+        Hello World
+        undefined
+
+    No exemplo acima eu digitei console.log('Hello World') dentro do shell e apertei enter. O Node vai então executar o código e nós podemos ver nossa mensagem registrada. Ele também imprimi undefined pelo fato de sempre mostrar o valor de retorno de cada comando, e console.log não retorna nada.
+
+
+    ---
+    # Já tenho o Node instalado, e agora o que fazer?
+
+     A outra forma de rodar o Node é fornecendo a ele um arquivo JavaScript para execução. Isto será na maioria das vezes a maneira como você irá utilizá-lo.
+
+    ***hello.js***
+    ```
+        console.log('Hello World');
+        $ node hello.js
+        Hello World
+     ```
+
+    Neste exemplo, eu movi o comando console.log() para dentro de um arquivo e então passei este arquivo para o comando node como um argumento. O Node então roda o JavaScript contido neste arquivo e imprimi "Hello World".
+    ---
+     # Gerenciando módulos com NPM
+
+    Assim como o Gems do Ruby ou o Maven do Java, o Node.js também possui o seu
+    próprio gerenciador de pacotes, ele se chama NPM (Node Package Manager). Ele
+    se tornou tão popular pela comunidade, que foi a partir da versão 0.6.0 do Node.js
+    que ele se integrou no instalador do Node.js, tornando-se o gerenciador default. Isto
+    simplificou a vida dos desenvolvedores na época, pois fez com que diversos projetos
+    se convergissem para esta plataforma.
+
+
+    ---
+     # NPM
+
+    Abaixo os comandos principais para que você tenha noções de como gerenciar módulos nele:
+
+    
+    - npm install nome_do_módulo: instala um módulo no projeto.
+    
+    - npm install -g nome_do_módulo: instala um módulo global.
+    
+    - npm install nome_do_módulo --save: instala o módulo no projeto, atualizando o package.json na lista de dependências.
+    
+    - npm list: lista todos os módulos do projeto.
+    
+    - npm list -g: lista todos os módulos globais.
+    
+    - npm remove nome_do_módulo: desinstala um módulo do projeto.
+
+    ---
+     # NPM
+    
+    - npm remove -g nome_do_módulo: desinstala um módulo global.
+    
+    - npm update nome_do_módulo: atualiza a versão do módulo.
+    
+    - npm update -g nome_do_módulo: atualiza a versão do módulo global.
+    
+    - npm -v: exibe a versão atual do npm.
+    
+    - npm adduser nome_do_usuário: cria uma conta no npm, através do site (https://npmjs.org) .
+    
+    - npm whoami: exibe detalhes do seu perfil público npm (é necessário criar uma conta antes).
+    
+    - npm publish: publica um módulo no site do npm, é necessário ter uma conta antes.
+    ---
+    # Entendendo o package.json
+
+    Todo projeto Node.js é chamado de módulo, mas o que é um módulo?
+
+    O termo módulo surgiu do conceito de que a arquitetura do Node.js é modular. 
+    
+    E todo módulo é acompanhado de um arquivo descritor, conhecido pelo nome de package.json.
+    
+    Este arquivo é essencial para um projeto Node.js. Um package.json mal escrito pode causar bugs ou impedir o funcionamento correto do seumódulo, pois ele possui alguns atributos chaves que são compreendidos pelo Node.js e NPM.
+
+
+    ---
+    # Modulos
+
+        {
+            "name": "meu-primero-node-app",
+            "description": "Meu primeiro app em Node.js",
+            "author": "Jackson Mafra <jackson@email.com>",
+            "version": "1.2.3",
+            "private": true,
+            "dependencies": {
+                "modulo-1": "1.0.0",
+                "modulo-2": "~1.0.0",
+                "modulo-3": ">=1.0.0"
+            },
+            "devDependencies": {
+                "modulo-4": "*"
+            }
+        }
+
+    Com esses atributos, você já descreve o mínimo possível o que será sua aplicação. O atributo name é o principal, com ele você descreve o nome do projeto, nome pelo qual seu módulo será chamado via função
+    require('meu-primeiro-node-app'). Em description descrevemos o que será este módulo. Ele deve ser escrito de forma curta e clara explicando um resumo do módulo.
+    ---
+    # Modulos
+
+    O author é um atributo para informar o nome e email do autor, utilize o formato: Nome <email> para que sites como (https://npmjs.org) reconheça corretamente esses dados. 
+
+    Outro atributo principal é o version, é com ele que definimos a versão atual do módulo, é extremamente recomendado que tenha este atributo, senão será impossível instalar o módulo via comando npm. 
+
+    O atributo private é um booleano, e determina se o projeto terá código aberto ou privado para download no (https://npmjs.org) .
+
+    ---
+    # Modulos - Versionamento
+
+    Os módulos no Node.js trabalham com 3 níveis de versionamento. Por exemplo, a versão 1.2.3 esta dividida nos níveis: Major (1),Minor (2) e Patch (3). 
+
+    Repare que no campo dependencies foram incluídos 4 módulos, cada módulo utilizou uma forma diferente de definir a versão que será adicionada no projeto. 
+
+    O primeiro, o modulo-1 somente será incluído sua versão fixa, a 1.0.0. Utilize este tipo versão para instalar dependências cuja suas atualizações possamquebrar o projeto pelo simples fato de que certas funcionalidades foram removidas e ainda as utilizamos na aplicação. 
+
+    O segundo módulo já possui uma certa flexibilidade de update. Ele utiliza o caractere ~ que faz atualizações a nível de patch (1.0.x), geralmente essas atualizações são seguras, trazendo apenasmelhorias ou correções de bugs. 
+
+    ---
+    # Modulos - Versionamento
+
+    O modulo-3 atualiza versões que seja maior ou igual a 1.0.0 em todos os níveis de versão. Em
+    muitos casos utilizar ”>=” pode ser perigoso, por que a dependência pode ser atualizada a nível major ou minor, contendo grandes modificações que podem quebrar um sistema em produção, comprometendo seu funcionamento e exigindo que você
+    atualize todo código até voltar ao normal. 
+
+    O último, o modulo-4, utiliza o caractere "*”, este sempre pegará a última versão do módulo em qualquer nível. Ele também pode causar problemas nas atualizações e tem o mesmo comportamento do versionamento do modulo-3. Geralmente ele é utilizado em devDependencies, que são dependências focadas para testes automatizados, e as atualizações dos módulos não prejudicam o comportamento do sistema que já está no ar.
+
+    ---
+    # Modulos - Versionamento    
+
+    Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, outras você precisa reutilizar, então você pensa:
+    
+    Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?
+    Para responder a essa pergunta, entram em cena duas especificações de módulo: **AMD** e **CommonJS** (ou **CJS**).
+    
+    Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.
+
+    ---
+    # Modulos - AMD
+
+    Asynchronous Module Definition (AMD) ficou bastante conhecido por causa do RequireJS. O formato de utilização do AMD é o seguinte:
+
+        define( 'moduleName', [ 'jquery' ], function( $ ) {
+          return 'Hello World!';
+        });
+
+
+    Essa é a estrutura mais básica de um módulo escrito no formato AMD. A função define será usada para todo novo módulo que você criar.
+
+    Como primeiro parâmetro dessa função, você pode passar o nome do módulo - opcional - (que será usado para você fazer o “include” dele em outro lugar).
+
+    O segundo parâmetro é um array de dependências desse módulo, também opcional. No nosso exemplo, colocamos como dependência a biblioteca jQuery.
+
+    ---
+    # Modulos - AMD
+
+    E o terceiro parâmetro é a função de callback que define o módulo e retorna o seu conteúdo. Essa função é obrigatória. Ela será chamada assim que todas as dependências do array no segundo parâmetro forem baixadas, e estiverem prontas para uso.
+
+    As dependências normalmente retornam valores. Para usar os valores retornados, você deve passar como parâmetros da função as variáveis que irão receber os valores das dependências, sempre na mesma ordem do array.
+
+    ---
+    # Modulos - AMD
+
+    Por exemplo, se no seu módulo você vai precisar utilizar o jQuery e a LoDash, você pode fazer a chamada da seguinte forma:
+
+        define([ 'jquery', 'lodash' ], function( $, _ ) {
+        // código do seu módulo
+        });
+
+    Se não houver dependências, a função já será executada assim que ela for chamada:
+   
+
+        define(function() {
+         // código do seu módulo
+        });
+
+    ---
+    # Modulos - CommonJS
+
+    Usando o exemplo dado quando falamos sobre AMD, nós podemos escrevê-lo assim, usando CJS:
+
+        var $ = require( 'jquery' );
+        function myModule() {
+          // código do seu módulo
+        }
+        module.exports = myModule;
+    
+    Nesse formato as coisas ficam muito explícitas. Na variável $, estamos importando através do require o módulo jquery. Na função myModule(), você vai escrever seu módulo, que será exportado através do module.exports, para que possa ser importado para outro arquivo usando o require.
+    ---
+    # Modulos - CommonJS
+
+    E o módulo jquery, para ser importado com o require, terá uma estrutura mais ou menos assim (arquivo jquery.js):
+
+        function jQuery() {
+          // código da jQuery
+        }
+        module.exports = jQuery;
+
+    Bem fácil de entender, não?
+    
+    ---
+    # Modulos - CommonJS
+
+    O CommonJS também dispõe de um objeto exports, que nada mais é que um alias para module.exports. Usando o exports, você consegue exportar vários métodos separadamente:
+
+        exports.method1 = function method1() {
+          // método 1 do seu módulo
+        };
+
+        exports.method2 = function method2() {
+          // método 2 do seu módulo
+        };
+            
+    ---
+    # Modulos - CommonJS
+
+    Que também pode ser escrito dessa forma:
+
+        module.exports = function() {
+          return {
+            method1: function method1() {
+              // método 1 do seu módulo
+            },
+
+            method2: function method2() {
+              // método 2 do seu módulo
+            }
+          }
+        };
+
+    Os dois retornam exatamente a mesma coisa. Na verdade, no segundo exemplo é necessário executar a função antes de poder usar os métodos, mas os dois são formatos padrão de objetos Javascript, que você já está acostumado 
+    ---
+    # Modulos - CommonJS
+
+    Podemos usar o CommonJS tanto no servidor, com NodeJS, por exemplo, como no browser, com o browserify.
+    
+    Bom, vimos que, usando tanto AMD como o CommonJS, fica fácil de modularizar qualquer código JS. Mas pensando em um cenário mais amplo: como eu vou saber se o desenvolvedor que vai usar meu módulo está usando AMD ou CommonJS? Vou ter que disponibilizar duas versões?
+    
+    Criar duas versões do mesmo código é praticamente uma heresia! ***DON’T REPEAT YOURSELF***!
+  
+    ---
+    # Modulos - UMD
+    ## O Capitão Planeta dos módulos
+
+    Universal Module Definition (UMD), é o cara que vai unir os poderes do AMD e do CommonJS em um único componente! Na verdade, ele é responsável por verificar qual dos formatos está sendo usado, para que você não precise duplicar o seu código :)
+
+    Seu código usando UMD vai ficar mais ou menos assim:
+
+        ;(function( root, factory ) {
+            if( typeof define === 'function' && define.amd ) {
+                define([ 'jquery' ], factory );
+            }
+            else if( typeof exports === 'object' ) {
+                module.exports = factory( require( 'jquery' ) );
+            }
+            else {
+                root.myModule = factory( root.jQuery );
+            }
+        })(this, function( $ ) {
+            return 'Hello World'!
+        });
+        
+    ---
+    # Modulos - UMD 
+
+    Eu sei, o código é bem feio, e à primeira vista é meio ruim de entender. Mas vou quebrá-lo em partes para explicar melhor o que ele faz, ok? Vamos lá!
+
+    Basicamente, você vai iniciar com uma IIFE (Immediately-Invoked Function Expression), ou função imediata, que é uma função auto-executável:
+
+
+        ;(function() {
+          
+        })();
+
+    Essa função vai receber dois parâmetros: o primeiro é o this, definido como root. Todo mundo sabe como o this em Javascript é polêmico, pois ele varia o seu valor conforme o escopo em que ele se encontra. 
+
+    No caso, estamos chamando o this no escopo global, logo, se eu estiver no client (browser), ele vai ser o objeto window. E se eu estiver no server (usando Node, por exemplo), ele será o objeto global.
+
+    ---
+    # Modulos - UMD  
+
+    O segundo parâmetro, definido como factory, é a função que vai executar seu módulo. Sabemos que, em Javascript, funções são objetos de primeira classe. Elas são tratadas como qualquer outro tipo de valor, logo, elas também podem ser passadas por parâmetro para outra função. O UMD se aproveita disso para deixar o negócio um pouco mais ilegível e difícil de entender. Mas olhando pelo lado bom, assim que você entende isso, fica fácil identificar cada parte :D
+    Então, passando os parâmetros, vai ficar assim:
+  
+        ;(function( root, factory ) {
+
+        })( this, function() {} );
+
+    Dentro da função passada como parâmetro vai o código do seu módulo:
+       
+        ;(function( root, factory ) {
+
+        })( this, function() {
+            // Código do seu módulo
+        });
+
+    ---
+    # Modulos - UMD
+
+    Agora vamos ver o que acontece por dentro da função principal. Como o UMD identifica se você está usando AMD ou CommonJS.
+
+    O formato AMD tem por padrão a função define e uma propriedade amd nessa função. É isso que é verificado no primeiro if:
+
+        if( typeof define === 'function' && define.amd ) {
+            // ...
+        }
+
+    Ou seja, se existir um define e este for uma função, e a propriedade amd estiver definida para essa função, então o desenvolvedor está usando alguma lib no formato AMD. Sabendo disso, é só eu usar essa função define para “definir” meu módulo, passar as dependências no array e chamar a função que executa o módulo:
+
+        if( typeof define === 'function' && define.amd ) {
+          define([ 'jquery' ], factory );
+        }
+
+    ---
+    # Modulos - UMD
+
+    Lembra quando falamos sobre AMD? Cada parâmetro da função do módulo representa uma depência do array, mantendo a ordem. Então a função que é passada como parâmetro (factory), precisa receber o parâmetro para chamar o jQuery dentro do nosso módulo, já que ele é uma dependência:
+   
+
+        ;(function( root, factory ) {
+          if( typeof define === 'function' && define.amd ) {
+            define([ 'jquery' ], factory );
+          }
+        })( this, function( $ ) {
+          // Código do seu módulo
+        });
+
+
+    Já resolvemos o problema do ***AMD***...
+
+    ---
+    # Modulos - UMD
+
+    Agora, se o usuário não estiver usando AMD, vamos ver se ele está usando CommonJS, na próxima verificação:
+
+        else if( typeof exports === 'object' ) {
+          // ...
+        }
+    Vimos que uma das coisas que define o formato CommonJS é que ele tem um objeto exports. Então é isso que iremos verificar. Se exports existir, e for um objeto, exportamos nosso módulo:
+      
+        // ...
+        else if( typeof exports === 'object' ) {
+          module.exports = factory( require( 'jquery' ) );
+        }
+        // ...
+    Como precisamos passar o jQuery como parâmetro ao nosso módulo, usamos o require, pois já vimos que é assim que uma dependência é incluída usando esse formato.
+    
+    Resolvido também o ***CommonJS***!
+
+    ---
+    # Modulos - UMD
+
+    Mas e se o desenvolvedor quiser usar nosso módulo, mas não estiver usando nem AMD, e nem CommonJS?
+    
+    Nesse caso, podemos dar um nome ao nosso módulo, exportando-o no escopo global, usando o root, que vai ser o objeto window, se ele estiver no browser, ou global, se ele estiver usando Node. Passamos também o objeto jQuery, que já deve estar também no escopo global:
+
+
+        else {
+          root.myModule = factory( root.jQuery );
+        }
+
+    ---
+    # Modulos - UMD
+
+    Existem algumas outras variações do UMD.
+
+    Então a solução é usar UMD pra tudo o que eu fizer?
+
+    Não jovem.
+
+    Para tudo o que for referente à sua aplicação em específico, você vai usar um único padrão: ou ***AMD***, ou ***CommonJS***, ou então algum pattern próprio.
+
+    Agora, quando você tiver um módulo genérico, que você quiser reutilizar em qualquer ambiente, e em qualquer projeto, é a hora de usar ***UMD***.
+
+    ---
+     # Escopos de variáveis globais
+
+    Assim como no browser, utilizamos o mesmo Javascript no Node.js, ele também utiliza escopos locais e globais de variáveis. A única diferença é como são implementados esses escopos. No client-side as variáveis globais são criadas da seguinte maneira:
+
+        window.hoje = new Date();
+        alert(window.hoje);
+
+    Em qualquer browser a palavra-chave window permite criar variáveis globais que são acessadas em qualquer lugar. Já no Node.js utilizamos uma outra keyword para aplicar essa mesma técnica:
+    
+        global.hoje = new Date();
+        console.log(global.hoje);
+    
+    
+
+    ---
+     # Escopos de variáveis globais
+
+    Ao utilizar global mantemos uma variável global, acessível em qualquer parte do projeto sem a necessidade de chamá-la via require ou passá-la por parâmetro em uma função. Esse conceito de variável global é existente na maioria das linguagens de programação, assim como sua utilização, pelo qual é recomendado trabalhar como mínimo possível de variáveis globais, para evitar futuros gargalos de memória na aplicação.
+    
+
+    ---
+     # CommonJS, Como ele funciona?
+
+    O Node.js utiliza nativamente o padrão CommonJS para organização e carregamento de módulos. Na prática, diversas funções deste padrão será utilizada comfrequência em um projeto Node.js. A função require('nome-do-modulo') é um exemplo disso, ela carrega um módulo. E para criar um código Javascript que seja modular e carregável pelo require, utilizam-se as variáveis globais: exports ou module.exports. Abaixo apresento-lhe dois exemplos de códigos que utilizam esse padrão do CommonJS, primeiro crie o código hello.js:
+    
+        module.exports = function(msg) {
+        console.log(msg);
+        };
+
+
+    ---
+    # CommonJS
+
+    E também crie o código human.js com o seguinte código:
+
+        exports.hello = function(msg) {
+        console.log(msg);
+        };
+
+    A diferença entre o hello.js e o human.js esta na maneira de como eles serão carregados. Em hello.js carregamos uma única função modular e em human.js é carregado um objeto comfunçõesmodulares. Essa é a grande diferença entre eles.
+
+    ---
+
+    # CommonJS
+
+    Para entendermelhor na prática crie o código app.js para carregar esses módulos, seguindo o código abaixo:
+        
+        var hello = require('./hello');
+        var human = require('./human');
+        hello('Olá pessoal!');
+        human.hello('Olá galera!');
+
+    Tenha certeza de que os códigos hello.js, human.js e app.js estejam na mesma pasta e rode no console o comando: 
+
+        node app.js.
+
+    ---
+     # Aplicação web
+
+    Node.js é multiprotocolo, ou seja, com ele será possível trabalhar com os protocolos:
+    HTTP, HTTPS, FTP, SSH, DNS, TCP, UDP,WebSockets e também existem outros protocolos, que são disponíveis através de módulos não-oficiais criados pela comunidade.
+    Um dos mais utilizados para desenvolver sistemas web é o protocolo HTTP. De fato, é o protocolo comamaior quantidade de módulos disponíveis para trabalhar no Node.js.
+
+    Toda aplicação web necessita de um servidor para disponibilizar todos os seus recursos. Na prática, comoNode.js você desenvolve uma "aplicação middleware”, ou seja, além de programar as funcionalidades da sua aplicação, você também programa códigos de configuração de infraestrutura da sua aplicação.
+
+    ---
+     # Aplicação web
+
+     Existem alguns módulos adicionais que já vêm com o mínimo necessário de configurações prontas para você não perder tempo trabalhando comisso. 
+
+     Alguns módulos conhecidos são: Connect(https://github.com/senchalabs/connect), Express (http://expressjs.com), Geddy (http://geddyjs.org) , CompoundJS (http://compoundjs.com) , Sails (http://balderdashy.github.io/sails) . 
+
+     Esses módulos já são preparados para trabalhar desde uma infraestrutura mínima até uma mais enxuta, permitindo trabalhar desde arquiteturas RESTFul, padrão MVC (Model-View-Controller) e também com conexões real-time utilizando WebSockets.
+
+    ---
+     # Servidor HTTP
+
+     Primeiro usaremos apenas o módulo nativo HTTP, pois precisamos entender todo o conceito desse módulo, visto que todos os frameworks citados acima o utilizam como estrutura inicial em seus projetos. Abaixo mostro a vocês uma clássica aplicação Hello World. Crie o arquivo hello_server.js com o seguinte conteúdo:
+
+        var http = require('http');
+        var server = http.createServer(function(request, response){
+            response.writeHead(200, {"Content-Type": "text/html"});
+            response.write("<h1>Hello World!</h1>");
+            response.end();
+        });
+        server.listen(3000);
+
+    Esse é um exemplo clássico e simples de um servidor node.js. Ele está sendo executado na porta 3000, por padrão ele responde através da rota raiz “/” um resultado em formato html com a mensagem: Hello World!.
+    Vá para a linha de comando e rode _node hello_server.js_. Faça o teste acessando, no seu navegador, o endereço _http://localhost:3000_ .
+    ---
+     # Como funciona um servidor http?
+
+     Um servidor node.js utiliza o mecanismo Event loop, sendo responsável por lidar coma emissão de eventos. Na prática, a função http.createServer() é responsável por levantar ums ervidor e o seu callback function(request, response) apenas é executado quando o servidor recebe uma requisição. Para isso, o Event loop constantemente verifica se o servidor foi requisitado e, quando ele recebe uma requisição, ele emite um evento para que seja executado o seu callback.
+
+    ---
+    # Como funciona um servidor http?
+
+     Se você ainda está começando com JavaScript, pode estranhar um pouco ficar passando como parâmetro uma function por todos os lados,mas isso é algo muito comum no mundo Javascript. Como sintaxe alternativa, caso o seu código fique muito complicado em encadeamentos de diversos blocos, podemos isolá-lo em funções com nomes mais significativos, por exemplo:
+
+        var http = require('http');
+        var atendeRequisicao = function(request, response) {
+            response.writeHead(200, {"Content-Type": "text/html"});
+            response.write("<h1>Hello World!</h1>");
+            response.end();
+        }
+        var server = http.createServer(atendeRequisicao);
+        var servidorLigou = function() {
+            console.log('Servidor Hello World rodando!');
+        }
+        server.listen(3000, servidorLigou);
+
+    ---
+     # Rotas
+
+    Até agora respondemos apenas o endereço /, mas queremos possibilitar que nosso servidor também responda a outros endereços. Utilizando um palavreado comum entre desenvolvedores rails, queremos adicionar novas rotas.
+
+    Vamos adicionar duas novas rotas, uma rota /bemvindo para página de “Bemvindo ao Node.js!” e uma rota genérica, que leva para uma página de erro.
+
+        var http = require('http');
+        var server = http.createServer(function(request, response){
+        response.writeHead(200, {"Content-Type": "text/html"});
+        if(request.url == "/"){
+            response.write("<h1>Página principal</h1>");
+        }else if(request.url == "/bemvindo"){
+            response.write("<h1>Bem-vindo :)</h1>");
+        }else{
+            response.write("<h1>Página não encontrada :(</h1>");
+        }
+        response.end();
+        });
+        server.listen(3000, function(){
+            console.log('Servidor rodando!');
+        });
+    ---
+     # URL
+
+    a leitura de url é obtida através da função request.url() que retorna uma string sobre o que foi digitado na barra de endereço do browser. Esses endereços utilizam padrões para capturar valores na url. Esses padrões são: query     strings ( ?nome=joao) e path ( /admin). Em um projeto maior, tratar todas as urls  dessa maneira seria trabalhoso e confuso demais. NoNode.js, existe omódulo nativo chamado url, que é responsável por fazer parser e formatação de urls. Acompanhe como capturamos valores de uma query string no exemplo abaixo.
+
+        var http = require('http');
+        var url = require('url');
+        var server = http.createServer(function(request, response){
+            response.writeHead(200, {"Content-Type": "text/html"});
+            response.write("<h1>Dados da query string</h1>");
+            var result = url.parse(request.url, true);
+
+            for(var key in result.query){
+                response.write("<h2>"+key+" : "+result.query[key]+"</h2>");
+            }
+            response.end();
+        });
+        server.listen(3000, function(){
+            console.log('Servidor http.');
+        });
+
+    ---
+     # URL
+
+    Neste exemplo, a função url.parse(request.url, true) fez um parser da url obtida pela requisição do cliente (request.url).
+    Esse módulo identifica através do retorno da função url.parser() os seguintes atributos:
+
+    - ***href:*** Retorna a url completa: _‘http://user:pass@host.com:8080/p/a/t/h?query=string#hash’_
+    - ***protocol:*** Retorna o protocolo: _‘http’_
+    - ***host:*** Retorna o domínio com a porta: _‘host.com:8080’_
+    - ***auth:*** Retorna dados de autenticação: _‘user:pass’_
+    - ***hostname:*** Retorna o domínio: _‘host.com’_
+    - ***port:*** Retorna a porta: _‘8080’_
+    - ***pathname:*** Retorna os pathnames da url: _‘/p/a/t/h’_
+    - ***search:*** Retorna uma query string: _‘?query=string’_
+    - ***path:*** Retorna a concatenação de pathname com query string: _‘/p/a/t/h?query=string’_
+    - ***query:*** Retorna uma query string em JSON: _{‘query’:’string’}_
+    - ***hash:*** Retorna ancora da url: _‘#hash’_
+
+    ---
+     # File System
+
+    Agora precisamos organizar os códigos HTML, e uma boa prática é separá-los do  Javascript, fazendo com que a aplicação renderize código HTML quando o usuário solicitar uma determinada rota. Para isso, utilizaremos outromódulo nativo FS (File System). Ele é responsável por manipular arquivos e diretórios do sistema operacional.
+    
+    O mais interessante desse módulo é que ele possui diversas funções de manipulação tanto de forma assíncrona como de forma síncrona. Por padrão, as funções nomeadas com o final Sync() são para tratamento síncrono. No exemplo abaixo,
+    apresento as duas maneiras de ler um arquivo utilizando File System:
+        
+        var fs = require('fs');
+        fs.readFile('/index.html', function(erro, arquivo){
+        if (erro) throw erro;
+        console.log(arquivo);
+        });
+        var arquivo = fs.readFileSync('/index.html');
+        console.log(arquivo);
+
+    ---
+    # File System
+
+    Diversos módulos do Node.js possuem funções com versões assíncronas e síncronas.
+    
+    O fs.readFile() faz uma leitura assíncrona do arquivo index.html.
+    
+    Depois que o arquivo foi carregado, é invocadouma função callback para fazer os tratamentos finais, seja de erro ou de retorno do arquivo. 
+
+    Já o fs.readFileSync() realizou uma leitura síncrona, bloqueando a aplicação até terminar sua leitura e retornar o arquivo.
+
+    ---
+    # File System
+
+    ## Limitações do File System nos sistemas operacionais
+
+    > Um detalhe importante sobre o módulo File System é que ele não é 100% consistente entre os sistemas operacionais.
+
+    > Algumas funções são específicas para sistemas Linux, OS X,Unix e outras são apenas para Windows. Para melhores informações leia sua documentação: http://nodejs.org/api/fs.html
+
+    ---
+     # I/O Assíncrono
+
+    O código abaixo exemplifica as diferenças entre uma função síncrona e assíncrona em relação a linha do tempo que ela são executadas. Basicamente criaremos um loop de 5 iterações, a cada iteração será criado um arquivo texto com o mesmo conteúdo Hello Node.js!.
+
+    _text_sync.js_
+
+        var fs = require('fs');
+        for(var i = 1; i <= 5; i++) {
+            var file = "sync-txt" + i + ".txt";
+            var out = fs.writeFileSync(file, "Hello Node.js!");
+            console.log(out);
+        }
+
+    _text_async.js_
+
+        var fs = require('fs');
+        for(var i = 1; i <= 5; i++) {
+            var file = "async-txt" + i + ".txt";
+            fs.writeFile(file, "Hello Node.js!", function(err, out) {
+                console.log(out);
+            });
+        }
+
+    ---
+     # Threads vs Assincronismos
+
+    Por mais que as funções assíncronas possamexecutar em paralelo várias tarefas, elas jamais serão consideradas umaThread (por exemploThreads do Java). A diferença é queThreads são manipuláveis pelo desenvolvedor, ou seja, você pode pausar a execução de umaThread ou fazê-laesperar o término de uma outra. Chamadas assíncronas apenas invocam suas funções numa ordem de que você não tem controle, e você só sabe quando uma chamada terminou quando seu callback é executado.
+
+    Pode parecer vantajoso ter o controle sobre asThreads a favor de um sistema que executa tarefas em paralelo, mas pouco domínio sobre eles pode transformar seu sistema em um caos de travamentos dead-locks, afinal Threads são executadas de forma bloqueante. Este é o grande diferencial das chamadas assíncronas, elas executam em paralelo suas funções sem travar processamento das outras e principalmente sem bloquear o sistema principal.
+
+
+    ---
+     # Entendendo o Event-Loop
+
+    Realmente trabalhar de forma assíncrona tem ótimos benefícios em relação a processamento I/O. Isso acontece devido ao fato, de queuma chamada de I/O é considerada um tarefa muito custosa para um computador realizar.
+
+    Vendo o contexto de um servidor, pormais potente que seja seu hardware, eles terão os mesmos bloqueios perceptíveis pelo usuário, a diferença é que um servidor estará lidando com milhares usuários requisitando I/O, com a grande  probabilidade de ser ao mesmo tempo.
+    
+    É por isso que o Node.js trabalha com assincronismo. Ele permite que você desenvolva um sistema totalmente orientado a eventos, tudo isso graças ao Event-loop.
+
+    ---
+     # Entendendo o Event-Loop
+
+    Ele é um mecanismo interno, dependente das bibliotecas da linguagem C: libev (http://pod.tst.eu/http://cvs.schmorp.de/libev/ev.pod) e libeio (http://software.schmorp.de/pkg/libeio.html),responsáveis por prover o assíncrono I/O no Node.js.
+
+    Basicamente ele é um loop infinito, que em cada iteração verifica se existem novos eventos em sua fila de eventos.
+
+    Tais eventos somente aparecem nesta fila quando são emitidos durante suas interações na aplicação. O EventEmitter, é o módulo responsável por emitir eventos e a maioria das bibliotecas do Node.js herdam deste módulo suas funcionalidades de eventos.
+
+    ---
+     # Entendendo o Event-Loop
+
+     Quando um determinado código emite um evento, omesmo é enviado para a fila de eventos para que o Event-loop executeo, e em seguida retorne seu callback. Tal callback pode ser executado através de uma função de escuta, semanticamente conhecida pelo nome: on().
+    
+    Programar orientado a eventos vai manter sua aplicação mais robusta e estruturada para lidar com eventos que são executados de forma assíncrona não bloqueantes.
+
+    Para conhecer mais sobre as funcionalidades do EventEmitter acesse sua documentação: http://nodejs.org/api/events.html
+
+    ---
+    # Callbacks Hell
+
+    De fato, vimos o quanto é vantajoso e performático trabalhar de forma assíncrona, porém em certosmomentos, inevitavelmente implementaremos diversas funções assíncronas, que serão encadeadas uma na outra através das suas funções callback.
+
+        var fs = require('fs');
+        fs.readdir(__dirname, function(erro, contents) {
+            if (erro) { throw erro; }
+            contents.forEach(function(content) {
+                var path = './' + content;
+                fs.stat(path, function(erro, stat) {
+                    if (erro) { throw erro; }
+                    if (stat.isFile()) {
+                        console.log('%s %d bytes', content, stat.size);
+                    }
+                });
+            });
+        });
+
+    ---
+    # Callbacks Hell
+
+    Reparem na quantidade de callbacks encadeados que existem em nosso código. Detalhe: ele apenas faz uma simples leitura dos arquivos de seu diretório e imprime na tela seu nome e tamanho em bytes.
+
+    Um pequena tarefa como essa deveria ter menos encadeamentos, concorda? Agora, imagine como seria a organização disso para realizar tarefasmas complexas? Praticamente o seu código seria um caos e totalmente difícil de fazermanutenções. Por ser assíncrono, você perde o controle do que está executando em troca de ganhos com performance, porém, um detalhe importante sobre assincronismo é que na maioria dos casos os callbacks bem elaborados possuem como parâmetro uma variável de erro.
+
+    ---
+    # Callback Heaven
+
+    Uma boa prática de código Javascript é criar funções que expressem seu objetivo e de forma isoladas, salvando em variável e passando-as como callback.
+
+        var fs = require('fs');
+        var lerDiretorio = function() {
+            fs.readdir(__dirname, function(erro, diretorio) {
+                if (erro) return erro;
+                    diretorio.forEach(function(arquivo) {
+                    ler(arquivo);
+                });
+            });
+        };
+
+        var ler = function(arquivo) {
+            var path = './' + arquivo;
+            fs.stat(path, function(erro, stat) {
+                if (erro) return erro;
+                if (stat.isFile()) {
+                    console.log('%s %d bytes', arquivo, stat.size);
+                }
+            });
+        };
+        lerDiretorio();
+    ---
+    # Express
+
+    Programar utilizando apenas a API HTTP nativa é muito trabalhoso! Conforme surgem necessidades de implementar novas funcionalidades, códigos gigantescos seriam acrescentados, aumentando a complexidade do projeto e dificultando futuras manutenções.
+
+    Foi a partir desse problema que surgiu um framework muito popular, que se chama Express. Ele é um módulo para desenvolvimento de aplicações web de grande escala. Sua filosofia de trabalho foi inspirada pelo framework Sinatra da linguagem Ruby. O site oficial do projeto é: (http://expressjs.com) .
+
+    ---
+    # Express
+
+    Ele possui as seguintes características:
+
+    - MVR (Model-View-Routes);
+    - MVC (Model-View-Controller);
+    - Roteamento de urls via callbacks;
+    - Middleware;
+    - Interface RESTFul;
+    - Suporte a File Uploads;
+    - Configuração baseado em variáveis de ambiente;
+    - Suporte a helpers dinâmicos;
+    - Integração com Template Engines;
+    - Integração com SQL e NoSQL;
+
+    ---
+    # Instalação e configuração
+
+    Sua instalação é muito simples e há algumas opções de configurações para começar um projeto. Para aproveitar todos os seus recursos, recomendo que instale-o em modo global:
+
+        npm install -g express
+
+    Feito isso, será necessário fechar e abrir seu terminal para habilitar o comando express, que é um CLI (Command Line Interface) do framework. 
+
+    Ele permite gerar um projeto inicial com suporte a sessões, Template engine (por padrão ele inclui o framework Jade) e um CSS engine (por padrão ele utiliza CSS puro). Para visualizar todas as opções execute o comando: 
+
+        express -h
+
+    ---
+    # Instalação
+
+        mkdir lab0201
+        cd lab0201
+
+    Use o comando npm init para criar um arquivo package.json para o seu aplicativo. Para obter mais informações sobre como o package.json funciona, consulte [Detalhes do tratamento de package.json](https://docs.npmjs.com/files/package.json) do npm.   
+    
+    $ npm init
+
+    Este comando solicita por várias coisas, como o nome e versão do seu aplicativo. Por enquanto, é possível simplesmente pressionar RETURN para aceitar os padrões para a maioria deles, com as seguintes exceções:
+
+
+        entry point: (index.js)
+
+    Insira app.js, ou qualquer nome que deseje para o arquivo principal. 
+
+    Se desejar que seja index.js, pressione RETURN para aceitar o nome de arquivo padrão sugerido.
+    
+    ---
+    
+    # Instalação    
+
+    Agora instale o Express no diretório app e salve-o na lista de dependências. Por exemplo:
+
+
+        npm install express --save 
+
+    ---
+    # Instalação
+
+    Inclua o seguinte código:
+
+
+        var express = require('express');
+        var app = express();
+
+        app.get('/', function (req, res) {
+          res.send('Hello World!');
+        });
+
+        app.listen(3000, function () {
+          console.log('Example app listening on port 3000!');
+        });
+
+    O aplicativo inicia um servidor e escuta a porta 3000 por conexões. O aplicativo responde com “Hello World!” à solicitações para a URL raiz (/) ou rota. Para todos os outros caminhos, ele irá responder com um 404 Não Encontrado.
+
+
+    ---
+    # Gerador de aplicativos do Express
+
+    Use a ferramenta geradora de aplicativos, express, para rapidamente criar uma estrutura básica de aplicativo.
+
+    Instale o express com o comando a seguir:
+
+
+        npm install express-generator -g
+
+    Exiba as opções de comando com a opção -h:
+
+
+        $ express -h
+
+          Usage: express [options][dir]
+
+          Options:
+
+            -h, --help          output usage information
+            -V, --version       output the version number
+            -e, --ejs           add ejs engine support (defaults to jade)
+                --hbs           add handlebars engine support
+            -H, --hogan         add hogan.js engine support
+            -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+                --git           add .gitignore
+            -f, --force         force on non-empty directory
+
+
+    ---
+    # Gerador de aplicativos do Express
+
+    Por exemplo, o seguinte cria um aplicativo do Express chamado lab0203 no diretório atualmente em funcionamento:
+
+
+        $ express lab0203
+
+           create : lab0203
+           create : lab0203/package.json
+           create : lab0203/app.js
+           create : lab0203/public
+           create : lab0203/public/javascripts
+           create : lab0203/public/images
+           create : lab0203/routes
+           create : lab0203/routes/index.js
+           create : lab0203/routes/users.js
+           create : lab0203/public/stylesheets
+           create : lab0203/public/stylesheets/style.css
+           create : lab0203/views
+           create : lab0203/views/index.jade
+           create : lab0203/views/layout.jade
+           create : lab0203/views/error.jade
+           create : lab0203/bin
+           create : lab0203/bin/www
+
+    ---
+    # Gerador de aplicativos do Express
+
+    Em seguida instale as dependências:
+
+
+        $ cd lab0203
+        $ npm install
+
+    No MacOS ou Linux, execute o aplicativo com este comando:
+
+
+        $ DEBUG=lab0203:* npm start
+
+    No Windows, use este comando:
+
+        > set DEBUG=lab0203:* & npm start
+
+    Em seguida carregue http://localhost:3000/ no seu navegador para acessar o aplicativo.
+
+    ---
+    # Gerador de aplicativos do Express
+
+    O aplicativo gerado possui a seguinte estrutura de diretórios:
+
+        .
+        ├── app.js
+        ├── bin
+        │   └── www
+        ├── package.json
+        ├── public
+        │   ├── images
+        │   ├── javascripts
+        │   └── stylesheets
+        │       └── style.css
+        ├── routes
+        │   ├── index.js
+        │   └── users.js
+        └── views
+            ├── error.jade
+            ├── index.jade
+            └── layout.jade
+
+        7 directories, 9 files
+
+    ---
+    # Roteamento Básico
+
+    O Roteamento refere-se à determinação de como um aplicativo responde a uma solicitação do cliente por um endpoint específico, que é uma URI (ou caminho) e um método de solicitação HTTP específico (GET, POST, e assim por diante).
+
+    Cada rota pode ter uma ou mais funções de manipulação, que são executadas quando a rota é correspondida.
+
+    A definição de rotas aceita a seguinte estrutura:
+
+        app.METHOD(PATH, HANDLER)
+
+    Onde:
+
+    - _app_ é uma instância do express.
+    - _METHOD_ é um método de solicitação HTTP.
+    - _PATH_ é um caminho no servidor.
+    - _HANDLER_ é a função executada quando a rota é correspondida.
+
+    ---
+    # Roteamento Básico
+
+    Os seguintes exemplos ilustram a definição de rotas simples.
+
+    Responder com Hello World! na página inicial:
+
+
+        app.get('/', function (req, res) {
+          res.send('Hello World!');
+        });
+
+    Responder a uma solicitação POST na rota raiz (/) com a página inicial do aplicativo:
+
+
+        app.post('/', function (req, res) {
+          res.send('Got a POST request');
+        });
+
+    ---
+    # Roteamento Básico
+
+    Responder a uma solicitação PUT para a rota /user:
+
+
+        app.put('/user', function (req, res) {
+          res.send('Got a PUT request at /user');
+        });
+
+    Responder a uma solicitação DELETE para a rota /user:
+
+
+        app.delete('/user', function (req, res) {
+          res.send('Got a DELETE request at /user');
+        });
+
+    ---
+    # Roteamento Básico
+
+    Existe um método de roteamento especial, app.all(), que não é derivado de nenhum método HTTP. Este método é usado para carregar funções de middleware em um caminho para todos os métodos de solicitação.
+
+    No exemplo a seguir, o manipulador irá ser executado para solicitações para “/secret” se você estiver usando GET, POST, PUT, DELETE, ou qualquer outro método de solicitação HTTP que é suportado no módulo http.
+
+
+        app.all('/secret', function (req, res, next) {
+            console.log('Accessing the secret section ...');
+            next(); // pass control to the next handler
+        });
+
+
+    ---
+    # Caminhos de rota
+
+    Caminhos de rota, em combinação com os métodos de solicitação, definem os terminais em que as solicitações podem ser feitas. Caminhos de rota podem ser sequências de caracteres, padrões de sequência, ou expressões regulares.
+
+    Aqui estão alguns exemplos de caminhos de rota baseados em sequências de caracteres
+
+    Este caminho de rota corresponde a solicitações à rota raiz, /.
+
+
+        app.get('/', function (req, res) {
+          res.send('root');
+        });
+
+    ---
+    # Caminhos de rota
+    Este caminho de rota irá corresponder a solicitações ao /about.
+
+
+        app.get('/about', function (req, res) {
+          res.send('about');
+        });
+
+    Este caminho de rota irá corresponder a solicitações ao /random.text.
+
+
+        app.get('/random.text', function (req, res) {
+          res.send('random.text');
+        });
+
+    > _Os caracteres ?, +, *, e () são subconjuntos de suas contrapartes em expressões regulares._ 
+    > _O hífen (-) e o ponto (.) são interpretados literalmente por caminhos baseados em sequências de caracteres._ 
+
+
+    ---
+    # Caminhos de rota
+
+    Exemplos de caminhos de rota baseados em expressões regulares:
+
+    Este caminho de rota irá corresponder a qualquer coisa com um “a” no nome.
+
+
+        app.get(/a/, function(req, res) {
+            res.send('/a/');
+        });
+
+    Este caminho de rota irá corresponder a butterfly e dragonfly, mas não a butterflyman, dragonfly man, e assim por diante.
+
+
+        app.get(/.*fly$/, function(req, res) {
+            res.send('/.*fly$/');
+        });
+
+    ---
+    # Métodos de resposta
+
+    Os métodos do objeto de resposta (res) na seguinte tabela podem enviar uma resposta ao cliente, e finalizar o ciclo solicitação-resposta. Se nenhum destes métodos forem chamados a partir de um manipulador de rota, a solicitação do cliente será deixada em suspenso.
+
+    - res.download() - Solicita que seja efetuado o download de um arquivo
+    - res.end() -  Termina o processo de resposta.
+    - res.json() - Envia uma resposta JSON.
+    - res.jsonp() Envia uma resposta JSON com suporta ao JSONP.
+    - res.redirect() - Redireciona uma solicitação.
+    - res.render() -   Renderiza um modelo de visualização.
+    - res.send() - Envia uma resposta de vários tipos.
+    - res.sendFile    Envia um arquivo como um fluxo de octeto.
+    - res.sendStatus() -   Configura o código do status de resposta e envia a sua representação em sequência de caracteres como o corpo de resposta.
+
+    ---
+    # app.route()
+
+    É possível criar manipuladores de rota encadeáveis para um caminho de rota usando o app.route(). Como o caminho é especificado em uma localização única, criar rotas modulares é útil, já que reduz redundâncias e erros tipográficos. Para obter mais informações sobre rotas, consulte: documentação do Router().
+
+    Aqui está um exemplo de manipuladores de rotas encadeáveis que são definidos usando app.route().
+
+
+        app.route('/book')
+          .get(function(req, res) {
+            res.send('Get a random book');
+          })
+          .post(function(req, res) {
+            res.send('Add a book');
+          })
+          .put(function(req, res) {
+            res.send('Update the book');
+          });
+
+    ---
+    # express.Router
+
+    Use a classe express.Router para criar manipuladores de rota modulares e montáveis. Uma instância de Router é um middleware e sistema de roteamento completo; por essa razão, ela é frequentemente referida como um “mini-aplicativo”
+
+    O seguinte exemplo cria um roteador como um módulo, carrega uma função de middleware nele, define algumas rotas, e monta o módulo router em um caminho no aplicativo principal.
+
+
+    ---
+    # express.Router
+
+    Crie um arquivo de roteador com um arquivo chamado clientes.js no diretório do aplicativo, com o seguinte conteúdo:
+
+
+        var express = require('express');
+        var router = express.Router();
+
+        // middleware that is specific to this router
+        router.use(function timeLog(req, res, next) {
+            console.log('Time: ', Date.now());
+            next();
+        });
+        // define the home page route
+        router.get('/', function(req, res) {
+            res.send('Clientes - Home');
+        });
+        // define the about route
+        router.get('/about', function(req, res) {
+            res.send('Sobre -  Clientes');
+        });
+
+        module.exports = router;
+    ---
+    # express.Router
+
+    Em seguida, carregue o módulo roteador no aplicativo:
+
+
+        var clientes = require('./clientes');
+        ...
+        app.use('/clientes', clientes);
+
+    O aplicativo será agora capaz de manipular solicitações aos caminhos /clientes e /clientes/about, assim como chamar a função de middleware timeLog que é específica para a rota.
+
+
+    ---
+    # Usando middlewares
+
+    O Express é uma estrutura web de roteamento e middlewares que tem uma funcionalidade mínima por si só: Um aplicativo do Express é essencialmente uma série de chamadas de funções de middleware.
+
+    Funções de Middleware são funções que tem acesso ao objeto de solicitação (req), o objeto de resposta (res), e a próxima função de middleware no ciclo solicitação-resposta do aplicativo. A próxima função middleware é comumente denotada por uma variável chamada next.
+
+    Funções de middleware podem executar as seguintes tarefas:
+
+    - Executar qualquer código.
+    - Fazer mudanças nos objetos de solicitação e resposta.
+    - Encerrar o ciclo de solicitação-resposta.
+    - Chamar a próxima função de middleware na pilha.
+
+    ---
+    # Usando middlewares
+
+    Se a atual função de middleware não terminar o ciclo de solicitação-resposta, ela precisa chamar next() para passar o controle para a próxima função de middleware. Caso contrário, a solicitação ficará suspensa.
+
+    Um aplicativo Express pode usar os seguintes tipos de middleware:
+
+     - Middleware de nível do aplicativo
+     - Middleware de nível de roteador
+     - Middleware de manipulação de erros
+     - Middleware integrado
+     - Middleware de Terceiros
+
+    É possível carregar middlewares de nível de roteador e de nível do aplicativo com um caminho de montagem opcional. É possível também carregar uma série de funções de middleware juntas, o que cria uma sub-pilha do sistema de middleware em um ponto de montagem.
+
+    ---
+    # Middleware de nível do aplicativo
+
+    Vincule middlewares de nível do aplicativo a uma instância do objeto app usando as funções app.use() e app.METHOD(), onde METHOD é o método HTTP da solicitação que a função de middleware manipula (como GET, PUT, ou POST) em letras minúsculas.
+
+    Este exemplo mostra uma função de middleware sem um caminho de montagem. A função é executada sempre que o aplicativo receber uma solicitação.
+
+        var app = express();
+
+        app.use(function (req, res, next) {
+          console.log('Time:', Date.now());
+          next();
+        });
+
+    ---
+    # Middleware de nível do aplicativo
+
+    Este exemplo mostra uma função de middleware montada no caminho /user/:id. A função é executada para qualquer tipo de solicitação HTTP no caminho /user/:id.
+
+
+        app.use('/user/:id', function (req, res, next) {
+          console.log('Request Type:', req.method);
+          next();
+        });
+
+    Este exemplo mostra uma rota e sua função manipuladora (sistema de middleware). A função manipula solicitações GET ao caminho /user/:id.
+
+
+        app.get('/user/:id', function (req, res, next) {
+          res.send('USER');
+        });
+
+    ---
+    # Middleware de nível do aplicativo
+
+    Aqui está um exemplo de carregamento de um série de funções de middleware em um ponto de montagem, com um caminho de montagem. Ele ilustra uma sub-pilha de middleware que imprime informações de solicitação para qualquer tipo de solicitação HTTP no caminho /user/:id.
+
+
+        app.use('/user/:id', function(req, res, next) {
+          console.log('Request URL:', req.originalUrl);
+          next();
+        }, function (req, res, next) {
+          console.log('Request Type:', req.method);
+          next();
+        });
+
+    ---
+    # Middleware de nível do aplicativo
+
+    Manipuladores de rota permitem a você definir várias rotas para um caminho. O exemplo abaixo define duas rotas para solicitações GET no caminho /user/:id. A segunda rota não irá causar nenhum problema, mas ela nunca será chamada pois a primeira rota termina o ciclo solicitação-resposta.
+
+    Este exemplo mostra uma sub-pilha de middleware que manipula solicitações GET no caminho /user/:id.
+
+
+        app.get('/user/:id', function (req, res, next) {
+          console.log('ID:', req.params.id);
+          next();
+        }, function (req, res, next) {
+          res.send('User Info');
+        });
+
+        // handler for the /user/:id path, which prints the user ID
+        app.get('/user/:id', function (req, res, next) {
+          res.end(req.params.id);
+        });
+
+    ---
+    # Middleware de nível do aplicativo
+
+    Para pular o restante das funções de middleware de uma pilha de middlewares do roteador, chame next('route') para passar o controle para a próxima rota. NOTA: O next('route') irá funcionar apenas em funções de middleware que são carregadas usando as funções app.METHOD() ou router.METHOD().
+
+    Este exemplo mostra uma sub-pilha de middleware que manipula solicitações GET no caminho /user/:id.
+
+
+        app.get('/user/:id', function (req, res, next) {
+          // if the user ID is 0, skip to the next route
+          if (req.params.id == 0) next('route');
+          // otherwise pass the control to the next middleware function in this stack
+          else next(); //
+        }, function (req, res, next) {
+          // render a regular page
+          res.render('regular');
+        });
+
+        // handler for the /user/:id path, which renders a special page
+        app.get('/user/:id', function (req, res, next) {
+          res.render('special');
+        });
+
+    ---
+    # Middleware de nível de roteador
+
+    Middlewares de nível de roteador funcionam da mesma forma que os middlewares de nível do aplicativo, mas estão vinculados a uma instância do express.Router().
+
+
+        var router = express.Router();
+
+    Carregue os middlewares de nível de roteador usando as funções router.use() e router.METHOD().
+    ---
+    # Middleware de nível de roteador
+    
+    O seguinte código de exemplo replica o sistema de middleware que é mostrado acima para o middleware de nível do aplicativo, usando um middleware de nível de roteador:
+
+
+        var app = express();
+        var router = express.Router();
+
+        // a middleware function with no mount path. This code is executed for 
+        // every request to the router
+        router.use(function (req, res, next) {
+          console.log('Time:', Date.now());
+          next();
+        });
+
+        // a middleware sub-stack shows request info for 
+        // any type of HTTP request to the /user/:id path
+        router.use('/user/:id', function(req, res, next) {
+          console.log('Request URL:', req.originalUrl);
+          next();
+        }, function (req, res, next) {
+          console.log('Request Type:', req.method);
+          next();
+        });
+
+    ---
+    # Middleware de nível de roteador
+
+        // a middleware sub-stack that handles GET requests to the /user/:id path
+        router.get('/user/:id', function (req, res, next) {
+        // if the user ID is 0, skip to the next router
+        if (req.params.id == 0) next('route');
+        // otherwise pass control to the next middleware function in this stack
+        else next(); //
+        }, function (req, res, next) {
+        // render a regular page
+        res.render('regular');
+        });
+
+        // handler for the /user/:id path, which renders a special page
+        router.get('/user/:id', function (req, res, next) {
+        console.log(req.params.id);
+        res.render('special');
+        });
+
+        // mount the router on the app
+        app.use('/', router);
+    ---
+    # Middleware de manipulação de erros
+
+    > _Middlewares de manipulação de erros sempre levam quatro argumentos. Você deve fornecer quatro argumentos para identificá-lo como uma função de middleware de manipulação de erros. Mesmo se você não precisar usar o objeto next, você deve especificá-lo para manter a assinatura. Caso contrário, o objeto next será interpretado como um middleware comum e a manipulação de erros falhará._
+
+    Defina funções de middleware de manipulação de erros da mesma forma que outras funções de middleware, exceto que com quatro argumentos ao invés de três, especificamente com a assinatura (err, req, res, next)):
+
+
+        app.use(function(err, req, res, next) {
+          console.error(err.stack);
+          res.status(500).send('Something broke!');
+        });
+
+    ---
+    # Middleware integrado
+
+    Desde a versão 4.x, o Express não depende mais do Connect. Com exceção da express.static, todas as funções de middleware que eram previamente incluídas com o Express estão agora em módulos separados. Visualize a lista de funções de middleware.
+
+        express.static(root, [options])
+
+    A única função de middleware integrada no Express é a express.static. Esta função é baseada no serve-static, e é responsável por entregar os ativos estáticos de um aplicativo do Express.
+
+    O argumento root especifica o diretório raiz a partir do qual entregar os ativos estáticos.
+
+    ---
+    # Middleware integrado
+
+    Aqui está um exemplo de uso da função de middleware express.static com um objeto options elaborado:
+
+
+        var options = {
+          dotfiles: 'ignore',
+          etag: false,
+          extensions: ['htm', 'html'],
+          index: false,
+          maxAge: '1d',
+          redirect: false,
+          setHeaders: function (res, path, stat) {
+            res.set('x-timestamp', Date.now());
+          }
+        }
+
+        app.use(express.static('public', options));
+    É possível ter mais do que um diretório estático por aplicativo:
+
+        app.use(express.static('public'));
+        app.use(express.static('uploads'));
+        app.use(express.static('files'));
+    ---
+    # Middleware de Terceiros
+
+    Use middlewares de terceiros para incluir funcionalidades aos aplicativos do Express
+
+    Instale o módulo Node.js para a funcionalidade requerida, em seguida carregue-a no seu aplicativo no nível do aplicativo ou no nível de roteador.
+
+    O exemplo a seguir ilustra a instalação e carregamento da função de middleware para análise sintática de cookies cookie-parser.
+
+
+        $ npm install cookie-parser
+
+
+        var express = require('express');
+        var app = express();
+        var cookieParser = require('cookie-parser');
+
+        // load the cookie-parsing middleware
+        app.use(cookieParser());
+
+    ---
+    # Entregando arquivos estáticos no Express
+
+    Para entregar arquivos estáticos como imagens, arquivos CSS, e arquivos JavaScript, use a função de middleware express.static integrada no Express.
+
+    Passe o nome do diretório que contém os ativos estáticos para a função de middleware express.static para iniciar a entregar os arquivos diretamente. Por exemplo, use o código a seguir para entregar imagens, arquivos CSS, e arquivos JavaScript em um diretório chamado public:
+
+
+        app.use(express.static('public'));
+
+    Agora, é possível carregar os arquivos que estão no diretório public:
+
+
+        http://localhost:3000/images/kitten.jpg
+        http://localhost:3000/css/style.css
+        http://localhost:3000/js/app.js
+        http://localhost:3000/images/bg.png
+        http://localhost:3000/hello.html
+
+    > _O Express consulta os arquivos em relação ao diretório estático, para que o nome do diretório estático não faça parte da URL._  
+          
+    ---
+    # Entregando arquivos estáticos no Express
+
+    Para usar vários diretórios de ativos estáticos, chame a função de middleware express.static várias vezes:
+
+
+        app.use(express.static('public'));
+        app.use(express.static('files'));
+
+    O Express consulta os arquivos na ordem em que você configurar os diretórios estáticos com a função de middleware express.static.
+
+    Para criar um prefixo de caminho virtual (onde o caminho não existe realmente no sistema de arquivos) para arquivos que são entregues pela função express.static, especifique um caminho de montagem para o diretório estático, como mostrado abaixo:
+
+
+        app.use('/static', express.static('public'));
+
+    ---
+    # Entregando arquivos estáticos no Express
+
+    Agora, é possível carregar os arquivos que estão no diretório public a partir do prefixo do caminho /static.
+
+
+        http://localhost:3000/static/images/kitten.jpg
+        http://localhost:3000/static/css/style.css
+        http://localhost:3000/static/js/app.js
+        http://localhost:3000/static/images/bg.png
+        http://localhost:3000/static/hello.html
+
+    Entretanto, o caminho fornecido para a função express.static é relativa ao diretório a partir do qual você inicia o seu node de processo. Se você executar o aplicativo express a partir de outro diretório, é mais seguro utilizar o caminho absoluto do diretório para o qual deseja entregar.
+
+
+        app.use('/static', express.static(__dirname + '/public'));
+    
+    ---
+    
+    # Integração de Banco de dados
+
+    A inclusão da capacidade de se conectar à banco de dados em aplicativos do Express é apenas uma questão de se carregar um driver Node.js apropriado para o banco de dados no seu aplicativo. Este documento explica brevemente como incluir e utilizar alguns dos mais populares módulos do Node.js para sistemas de bancos de dados no seu aplicativo do Express:
+
+     - Cassandra
+     - CouchDB
+     - LevelDB
+     - MySQL
+     - MongoDB
+     - Neo4j
+     - PostgreSQL
+     - Redis
+     - SQLite
+     - ElasticSearch
+
+
+    ---
+    
+    # LevelDB
+
+    Módulo: [levelup](https://github.com/Level/levelup?_ga=1.116155779.422133707.1462294138) Instalação
+
+
+        $ npm install level levelup leveldown
+
+    Exemplo
+
+
+        var levelup = require('levelup');
+        var db = levelup('./mydb');
+
+        db.put('name', 'LevelUP', function (err) {
+
+          if (err) return console.log('Ooops!', err);
+          db.get('name', function (err, value) {
+            if (err) return console.log('Ooops!', err);
+            console.log('name=' + value);
+          });
+
+        });
+
+    ---
+    
+    # MySQL
+
+    Módulo: mysql Instalação
+
+
+        $ npm install mysql
+
+    Exemplo
+
+        var mysql      = require('mysql');
+        var connection = mysql.createConnection({
+          host     : 'localhost',
+          user     : 'dbuser',
+          password : 's3kreee7'
+        });
+
+        connection.connect();
+
+        connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+          if (err) throw err;
+          console.log('The solution is: ', rows[0].solution);
+        });
+
+        connection.end();
+
+    ---
+    
+    # MongoDB
+
+    Módulo: mongodb Instalação
+
+        $ npm install mongodb
+
+    Exemplo
+
+
+        var MongoClient = require('mongodb').MongoClient;
+
+        MongoClient.connect('mongodb://localhost:27017/animals', function(err, db) {
+          if (err) {
+            throw err;
+          }
+          db.collection('mammals').find().toArray(function(err, result) {
+            if (err) {
+              throw err;
+            }
+            console.log(result);
+          });
+        });
+
+    Se desejar um driver de modelo de objeto para o MongoDB, consulte em Mongoose.
+
+
+    ---
+    
+    # Redis
+
+    Módulo: redis Instalação
+
+        $ npm install redis
+
+    Exemplo
+
+        var client = require('redis').createClient();
+
+        client.on('error', function (err) {
+          console.log('Error ' + err);
+        });
+
+        client.set('string key', 'string val', redis.print);
+        client.hset('hash key', 'hashtest 1', 'some value', redis.print);
+        client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
+
+        client.hkeys('hash key', function (err, replies) {
+
+          console.log(replies.length + ' replies:');
+          replies.forEach(function (reply, i) {
+            console.log('    ' + i + ': ' + reply);
+          });
+
+          client.quit();
+
+        });
+
+    ---
+    
+    # SQLite
+
+    Módulo: sqlite3 Instalação
+
+        $ npm install sqlite3
+
+    Exemplo
+
+
+        var sqlite3 = require('sqlite3').verbose();
+        var db = new sqlite3.Database(':memory:');
+
+        db.serialize(function() {
+
+          db.run('CREATE TABLE lorem (info TEXT)');
+          var stmt = db.prepare('INSERT INTO lorem VALUES (?)');
+
+          for (var i = 0; i < 10; i++) {
+            stmt.run('Ipsum ' + i);
+          }
+
+          stmt.finalize();
+
+          db.each('SELECT rowid AS id, info FROM lorem', function(err, row) {
+            console.log(row.id + ': ' + row.info);
+          });
+        });
+
+        db.close();
+
+    ---
+    
+    # Migrando do MySQL para Mongo
+
+    Baseado no [SQL to MongoDB Mapping Chart](https://docs.mongodb.org/manual/reference/sql-comparison/)
+
+        SQL Terms/Concepts      MongoDB Terms/Concepts
+    
+        database                database
+        table                   collection
+        row                     document or BSON document
+        column                  field
+        index                   index
+        table joins             embedded documents and linking
+        primary key             primary key
+        aggregation             aggregation pipeline
+        (e.g. group by) 
+
+
+    ---
+    
+    # Migrando do MySQL para Mongo
+
+
+    ### Criando uma coleção
+
+        db.createCollection( "agenda" )
+
+    ### Inseriando registro na coleção
+
+        db.agenda.insert({nome:"Tiozinho" , email: "tio@gmail.com" , telefone: "9999-9999" });    
+
+    ### Buscando registro na coleção
+
+        //Lista todos os registros
+        db.agenda.find()
+
+        //Lista apenas o definido no parâmetro
+        db.agenda.find({id:1}) // {id:1} é o parâmetro
+
+    ---
+    
+    # Migrando do MySQL para Mongo
+
+    ### Excluindo registro da coleção
+
+        db.agenda.remove({id:1});
+
+    ### Atualizando um registro na coleção
+
+        //Buscando o Tiozinho
+        var agd = db.agenda.find({id:1});
+
+        //Alterando apenas o email
+        agd.email = "tiozinho@gmail.com";
+
+        //Atualizando na coleção
+        db.agenda.save(agd);
+
+    ---
+    
+    # Migrando do MySQL para Mongo
+
+     - drop()
+     - dropDataBase()
+     - update()
+     - count()
+     - limit()
+     - sort()
+
+
+
+    ---
+    
+    # MongoDB no Node.js utilizando Mongoose
+
+    O Mongoose possui uma interfacemuito fácil de aprender. Em poucos códigos, você vai conseguir criar uma conexão no banco de dados e executar uma query ou persistir dados. Com o MongoDB instalado e funcionando em sua máquina, vamos instalar omódulo mongoose, que é um framework responsável pormapear objetos do Node.js para MongoDB.
+
+
+    ---
+    
+    # Mongoose
+
+        var express = require('express')
+        , app = express()
+        , mongoose = require('mongoose');
+
+        global.db = mongoose.connect('mongodb://localhost/agenda');
+
+    Quando é executada a função mongoose.connect cria-se uma conexão com o banco de dados MongoDB para o Node.js. Como o MongoDB é schemaless, na primeira vez que a aplicação se conecta com o banco através da url 'mongodb://localhost/agenda' automaticamente em run-time é criada uma base de dados com o nome agenda.
+
+    ---
+    
+    # Modelando com Mongoose
+
+    O Mongoose é um módulo focado para a criação de models, isso significa que com ele criaremos objetos persistentes modelando seus atributos através do objeto mongoose.Schema. Após a implementação de um modelo, temos que registrálo no banco de dados, utilizando a função db.model('nome-do-model',modelSchema), que recebeummodelo e cria sua respectiva collection no MongoDB.
+
+
+    ---
+    
+    # Socket.IO
+
+    O Socket.IO fornece comunicação em tempo real entre seu servidor e clientes do node.js. 
+
+    Para quem não conhece, o WebSocket era parte da especificação do HTML5 que descreve a comunicação bidirecional (envie e recebe mensagens) entre canais através de TCP/IP. Não faz mais parte do HTML5 e ganhou vida própria, sendo o protocolo padronizado pela IETF como RFC 6455 e a API padronizada pela W3C.
+    
+    ---
+    
+    # Socket.IO
+
+    O Socket.IO abstrai e utiliza o WebSocket como o seu principal mecanismo. E se não for compatível com o meu ambiente? Então o próprio Socket.IO se encarrega de providenciar outros mecanismos de transporte, como fallback:
+
+     - Adobe® Flash® Socket
+     - AJAX long polling
+     - AJAX multipart streaming
+     - Forever Iframe
+     - JSONP Polling
+
+    Você não precisa se preocupar, por que tudo é transparente para você! Dá para entender por que o módulo é tão popular – pois garante compatibilidade entre diferentes clientes e servidores, sejam através de dispositivos móveis ou desktops, independente de versão de browser e sistema operacional.
+     
+    ---
+    
+    # E como o WebSocket funciona?
+
+    Basicamente ouvimos e transmitimos mensagens. Neste caso, você tem basicamente dois métodos que vão ditar todo o restante: on e emit. Simples assim. No on você deixa o servidor ou o client aguardando uma mensagem chegar e no emit você transmite esta mensagem.
+
+    ![](https://evenancio.files.wordpress.com/2013/12/websocket-chat.png?w=527)
+
+    ---
+    
+    # TDD e Node.js – Introdução ao Mocha
+
+    Independente da linguagem utilizada ou onde sua aplicação é executada, no cliente (browser) ou servidor, escrever testes é sempre uma ótima prática! Com JavaScript e Node.js não é diferente. Existem vários frameworks que facilitam a escrita, execução e análise dos testes, o que mais me agradou até o momento é o Mocha.
+
+    A instalação do Mocha é simples, utilizamos o NPM que é responsável por fazer o download e instalar o pacote escolhido. Para quem conhece o NuGet disponível para .NET no Visual Studio, o NPM é o equivalente no mundo Node.js.
+
+        npm install mocha
+
+    ---
+    
+    # Mocha
+
+    Após instalado vamos começar com a primeira boa prática. Por padrão o comando mocha procura os arquivos de teste em um diretório chamado test. Então no diretório da sua aplicação crie um diretório chamado test e coloque lá seus arquivos de teste. Podemos agora começar a desenvolver os testes da nossa aplicação, nesse primeiro momento vamos criar dois testes bem simples.
+
+        var assert = require('assert');
+
+        describe('Alguns testes de exemplo', function(){
+            
+            it('2 + 2 deve ser igual a 4', function(){
+                assert.equal(4, 2 + 2);
+            });
+
+            it('2 * 2 deve ser igual a 8 (nota 0 em matemática)', function(){
+                assert.equal(8, 2 * 2);
+            });
+
+        });
+    ---
+    
+    # Mocha
+
+    Na primeira linha do código referenciamos a biblioteca assert que está disponível no Node.js. No exemplo utilizamos só o método assert.equal mas na documentação você encontrará os outros métodos disponíveis.
+
+    Os métodos describe e it fazem parte do Mocha, mais especificamente da API de BDD do Mocha.
+
+    Com o teste criado basta executar o comando mocha no ser Terminal (OSX) ou Command Prompt (Windows) e ver que um teste passou e outro não.
+    
+    ---
+    
+    # Um projeto testável
+
+    Vamos iniciar um projeto simples, mas que tenha a capacidade de mostrar o Mocha atuando. Primeiramente vamos instalar todas as dependências:
+    
+        # Crie um projeto em uma pasta vazia
+        mkdir meu-projeto && cd meu-projeto && npm init
+
+        # Logo após instale o Mocha globalmente
+        sudo npm install -g mocha
+
+        # Criamos as pastas principais do projeto
+        mkdir test lib
+
+        # Assim como o arquivo principal
+        touch index.js test/general-test.js
+
+        # Logo após abra o arquivo general-test.js
+        # com o seu editor favorito
+        vim general-test.js
+ 
+    ---
+    
+    # Mocha
+
+    Nesta aplicação, construiremos uma biblioteca capaz de executar os cálculos que são passados via linha de comando. Primeiramente vamos aos testes: 
+
+    ---
+    
+    # Mocha
+
+        // Vamos usar a lib assert, que já
+        // vem no core do Node.js
+        var assert = require('assert');
+
+        // E também vamos incluir a lib
+        // da calculador, que criaremos mais tarde
+        var calculadora = require('../lib/calculadora');
+
+        // Descrevemos um tópico inicial usando
+        // o método describe() do Mocha
+        describe('Testes gerais da calculadora', function(){
+
+        // Dentro do tópico criamos os testes relacionados
+        // aos mesmos, fazemos isso usando o método it()
+        it('A calculadora deve ser uma função', function(){
+
+            // Usamos o assert.equal() para verificar se
+            // o tipo da variável 'calculadora' realmente
+            // é uma função
+            assert.equal(typeof calculadora, 'function');
+        });
+
+        it('O cálculo 191 * 7 deve ser igual a 1337', function(){
+            assert.equal(calculadora('191 * 7'), 1337);
+        });
+
+        });
+
+    ---
+    
+    # Mocha
+
+    Fácil e rápido, você já pode usar o comando mocha ./test/*-test.js para ver o que está de errado com sua aplicação, ou utilizar o parâmetro –reporter spec para ter um relatório mais agradável. Certamente o teste reclamou da ausência do arquivo../lib/calculadora.js, então vamos criá-lo:
+
+        // Vamos usar o módulo VM para compilar o input
+        // do usuário, lembre-se: evite o eval()
+        var vm = require('vm');
+
+        module.exports = function(calculo){
+
+            // Vamos executar o código que fora passado
+            // e retornar o seu resultado
+            return vm.runInNewContext('(function(){ return ' + calculo + '})()');
+        };
+    
+    ---
+    
+    # Mocha
+
+    Agora, usando o Mocha, seus testes devem passar. Só está faltando o programa principal, vamos editar o index.js:
+
+        var calculador = require('./lib/calculadora');
+        var resultado = calculador(process.argv[2]);
+        console.log(resultado);
+
+    Executando node ./ ‘1 + 1’, você deve ver o output 2 em seu terminal.    
+
+    ---
+    
+    # Monitorando aplicação através de logs
+
+    Quando colocamos um sistema em produção, aumentamos os riscos de acontecerem
+    bugs que não foram identificados durante os testes no desenvolvimento. Isso
+    é normal, e toda aplicação já passou ou vai passar por esta situação. O importante
+    neste caso é ter ummeio demonitorar todo comportamento da aplicação, através de
+    arquivos de logs. Tanto o Express quanto o Socket.IO possuem um middleware para
+    monitorar e gerar logs. Sua instalação é simples, abra o app.js e adicione no topo
+    da stack de configurações do Express a função app.use(express.logger()):
+    
+        app.use(express.logger());
+        app.use(express.json());
+        app.use(express.urlencoded());
+
+    ---
+    
+    # Aplicando Singleton nas conexões do Mongoose
+
+    No Mongoose, apenas aplicaremos o design pattern Singleton para instanciar as conexões
+    do banco de dados. Isso será implementado com o objetivo de garantir que
+    apenas uma única conexão seja instanciada e compartilhada por toda aplicação. No
+    arquivo lib/db_connect.js, codifique aplicando as seguintes mudanças:
+
+        var mongoose = require('mongoose')
+        , single_connection
+        , env_url = {
+            "test": "mongodb://localhost/ntalk_test",
+            "development": "mongodb://localhost/ntalk"
+        };
+        module.exports = function() {
+            var env = process.env.NODE_ENV || "development"
+            , url = env_url[env];
+            if(!single_connection) {
+                single_connection = mongoose.connect(url);
+            }
+            return single_connection;
+        };
+
+    ---
+    
+    # Mantendo o sistema no ar com Forever
+
+    O Node.js é praticamente uma plataforma de baixo nível, com ele temos bibliotecas
+    com acesso direto aos recursos do sistema operacional, e programamos entre diversos
+    protocolos, como por exemplo, o protocolo http. Para trabalhar com http, temos
+    que programar como será o servidor http e também sua aplicação. Quando colocamos
+    uma aplicação Node em produção diversos problemas e bugs são encontrados
+    com o passar do tempo, e quando surge um bug grave o servidor cai, deixando a
+    aplicação fora do ar. De fato, programar em Node.js requer lidar com esses detalhes
+    de servidor.
+
+    ---
+    
+    # Mantendo o sistema no ar com Forever
+
+    O Forever é uma ferramenta que surgiu para resolver esse problema de queda do
+    servidor. Seu objetivo émonitorarumservidor realizando pings a cada curto período
+    predeterminado pelo desenvolvedor. Quando ele detecta que a aplicação está fora do
+    ar, automaticamente ele dá um restart nela. Ele consegue fazer isso por que mantém
+    a aplicação rodando em background no sistema operacional.
+
+  </textarea>
+  <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+  </script>
+  <script>
+    var slideshow = remark.create();
+  </script>
+</body>
+</html>
