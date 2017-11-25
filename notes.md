@@ -15,6 +15,10 @@
  - https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
  - https://www.youtube.com/watch?v=8aGhZQkoFbQ
  - https://imasters.com.br/front-end/javascript/node-js-o-que-e-esse-event-loop-afinal/?trace=1519021197&source=single
+ - http://blog.leandrocurioso.com/2017/05/conhecendo-o-fluxo-de-execucao-assincrono-em-nodejs/
+
+
+
 
 ##APIs HTTP+JSON
 
