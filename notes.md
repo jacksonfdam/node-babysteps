@@ -1,4 +1,4 @@
-#Links
+# Links
 
 ### Referencias
 
@@ -20,7 +20,7 @@
 
 
 
-##APIs HTTP+JSON
+## APIs HTTP+JSON
 
 Este guia descreve uma série de boas práticas para o projeto de APIs HTTP+JSON, originalmente extraído de um trabalho na API da Plataforma Heroku.
 
@@ -29,3 +29,56 @@ Este guia inclui adições a essa API e serve de guia para novas APIs Internas n
 
 https://github.com/jacksonfdam/http-api-design
 
+
+
+
+Jackson Mafra
+@jacksonfdam
+https://jacksonfdam.github.io/
+
+
+https://github.com/jacksonfdam/node-babysteps
+
+
+## Agenda
+
+Encontro 01
+- Introdução
+- Configurando ambiente de desenvolvimento
+- O que é node.js?
+- O que é npm?
+- Criando o primeiro projeto
+- Como utilizar módulos
+- Trabalhando com http
+- Trabalhando com arquivos
+
+Encontro 02 
+- Trabalhando com evento emitter
+- Adicionar pacotes externos
+- Trabalhando com Websockets
+- Principais frameworks
+- Iniciando com Express.js
+
+--
+
+### Links
+
+https://imasters.com.br/desenvolvimento/guias-de-estilos-para-projetos-javascript/
+https://sailsjs.com/
+https://www.meteor.com/
+https://hapijs.com/tutorials
+https://docs.nestjs.com/
+
+### ORMS
+
+http://www.camintejs.com/
+https://github.com/sequelize/sequelize
+http://mongoosejs.com/docs/index.html
+https://github.com/Automattic/monk
+http://sqlite.org/index.html
+
+http://sqlitebrowser.org/
+https://robomongo.org/
+
+https://nodemon.io/
+https://github.com/foreverjs/forever
